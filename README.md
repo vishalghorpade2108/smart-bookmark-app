@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Bookmark App 🚀
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-14-black) ![Supabase](https://img.shields.io/badge/Supabase-Realtime-green) ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-UI-blue)
 
-First, run the development server:
+A **full-stack Bookmark Manager** built with **Next.js**, **Supabase**, and **Tailwind CSS**.  
+Manage your bookmarks in real-time with Google authentication — private and synced across tabs.
+
+---
+
+## 🔥 Features
+
+- 🔐 **Google OAuth login** (No email/password)
+- 📌 **Add bookmarks** (Title + URL)
+- ❌ **Delete bookmarks** with loading spinner
+- ⚡ **Realtime updates** across tabs
+- 🎨 **Clean, responsive UI** with Tailwind CSS
+- ⏳ **Loading states** and error handling
+- 📱 Mobile-friendly design
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** Next.js 14 (App Router)  
+- **Backend:** Supabase (Auth, Database, Realtime)  
+- **Styling:** Tailwind CSS  
+- **Deployment:** Vercel  
+
+---
+
+## 📂 Project Structure
+
+bookmark-app/
+│
+├── app/
+│ ├── page.tsx → Login page
+│ ├── dashboard/page.tsx → Dashboard with bookmarks
+│
+├── lib/
+│ └── supabaseClient.ts → Supabase client
+│
+├── .env.local 
+├── .gitignore
+├── package.json
+├── README.md
+
+
+
+---
+
+## 🗄 Database Schema
+
+Create a table in Supabase called `bookmarks` with the following columns:
+
+| Column      | Type      | Description |
+|------------|-----------|-------------|
+| id         | uuid      | Primary key |
+| title      | text      | Bookmark title |
+| url        | text      | Bookmark URL |
+| user_id    | uuid      | Foreign key to `auth.users` |
+| created_at | timestamp | Default: now() |
+
+Enable **Realtime** on this table to sync bookmarks across tabs instantly.
+
+---
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+git clone https://github.com/vishalghorpade2108/smart-bookmark-app.git
+cd bookmark-app
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📝 Problems & Solutions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Problem | How I Solved It |
+|---------|----------------|
+| Bookmarks did not appear in other tabs immediately | Implemented **Supabase Realtime subscription** (`postgres_changes`) to sync inserts, updates, and deletes in real-time. |
+| Delete button did not show feedback | Added a **loading spinner** and disabled the button while the delete request was processing. |
+| Empty input fields could submit | Added **input validation** and displayed an error message when Title or URL is empty. |
+| Text visibility issues on dark/light backgrounds | Adjusted **Tailwind CSS classes** for proper contrast so text is readable. |
+| URLs without `http://` or `https://` could break | Added **simple validation** to ensure URLs are complete. |
+| OAuth login URL shows `#access_token` in production on Vercel | Used `supabase.auth.getSessionFromUrl()` in `useEffect` to handle redirect properly and cleaned the URL after login. |
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## 🌍 Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Deploy to **Vercel**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push code to GitHub  
+2. Connect the repository to Vercel  
+3. Add environment variables in the Vercel dashboard (`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`)  
+4. Deploy 🚀  
 
-## Deploy on Vercel
+> Example live URL: `https://smart-bookmark-app-tau-five.vercel.app/`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👨‍💻 Author
+
+**Vishal Ghorpade**  
