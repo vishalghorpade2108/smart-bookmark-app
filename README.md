@@ -29,20 +29,22 @@ Manage your bookmarks in real-time with Google authentication — private and sy
 ---
 
 ## 📂 Project Structure
-
-bookmark-app/
+```
+bookmark/
 │
 ├── app/
-│ ├── page.tsx → Login page
-│ ├── dashboard/page.tsx → Dashboard with bookmarks
+│   ├── page.tsx              ← Login page
+│   └── dashboard/
+│       └── page.tsx          ← Dashboard with bookmarks
 │
 ├── lib/
-│ └── supabaseClient.ts → Supabase client
+│   └── supabaseClient.ts     ← Supabase client setup
 │
-├── .env.local 
+├── .env.local                ← Environment variables (DO NOT COMMIT)
 ├── .gitignore
 ├── package.json
-├── README.md
+└── README.md
+```
 
 
 
@@ -64,9 +66,17 @@ Enable **Realtime** on this table to sync bookmarks across tabs instantly.
 
 ---
 
-```bash
-git clone https://github.com/vishalghorpade2108/smart-bookmark-app.git
-cd bookmark-app
+## 🌍 Deployment
+
+Deploy to **Vercel**:
+
+1. Push code to GitHub  
+2. Connect the repository to Vercel  
+3. Add environment variables in the Vercel dashboard (`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`)  
+4. Deploy 🚀  
+
+> Example live URL: `https://smart-bookmark-app-tau-five.vercel.app/`
+
 
 
 ## 📝 Problems & Solutions
@@ -81,16 +91,7 @@ cd bookmark-app
 | OAuth login URL shows `#access_token` in production on Vercel | Used `supabase.auth.getSessionFromUrl()` in `useEffect` to handle redirect properly and cleaned the URL after login. |
 
 
-## 🌍 Deployment
 
-Deploy to **Vercel**:
-
-1. Push code to GitHub  
-2. Connect the repository to Vercel  
-3. Add environment variables in the Vercel dashboard (`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`)  
-4. Deploy 🚀  
-
-> Example live URL: `https://smart-bookmark-app-tau-five.vercel.app/`
 
 
 ## 👨‍💻 Author
